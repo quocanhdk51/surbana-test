@@ -86,3 +86,11 @@ interface BuildingLocationTree extends Building {
 - PUT api/locations body: LocationUpdateRequest => Location
 - DELETE api/locations/:id => { success: boolean }
 
+# Install & Run
+- Setup Postgres DB with table name as postgres, user as postgres and password as postgres
+- Postgres DB should be serving on PORT 5432
+- For customization, Please have a look at knexfile.ts for configuration
+- Run npm i and npm i knex -g
+- Run knex migrate:latest
+- Run npm run dev to start server
+
