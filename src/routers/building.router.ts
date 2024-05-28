@@ -8,6 +8,7 @@ import {
   paginationRequestSchema,
 } from "../zod";
 import { PaginationUtils } from "../utils";
+import { HttpStatus } from "../constants";
 
 const buildingRouter = Router();
 
@@ -17,7 +18,7 @@ buildingRouter.post(
   async (req, res, next) => {
     try {
       const building = await buildingService.createBuilding(req.body);
-      res.status(201).json(building);
+      res.status(HttpStatus.CREATED).json(building);
     } catch (e) {
       next(e);
     }
@@ -102,7 +103,7 @@ buildingRouter.delete(
   async (req, res, next) => {
     try {
       await buildingService.deleteBuilding(+req.params.id);
-      res.status(204).end();
+      res.status(HttpStatus.DELETE).json({ success: true });
     } catch (e) {
       next(e);
     }

@@ -50,13 +50,8 @@ export class LocationService {
     return location;
   }
 
-  async deleteLocation(id: number): Promise<Location> {
-    const [location] = await knexInstance("locations")
-      .where({ id })
-      .delete()
-      .returning<Location[]>("*");
-
-    return location;
+  deleteLocation(id: number): Promise<Location> {
+    return knexInstance("locations").where({ id }).delete();
   }
 }
 

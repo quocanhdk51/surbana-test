@@ -72,13 +72,8 @@ export class BuildingService {
     return building;
   }
 
-  async deleteBuilding(id: number): Promise<Building> {
-    const [building] = await knexInstance("buildings")
-      .where({ id })
-      .delete()
-      .returning<Building[]>("*");
-
-    return building;
+  deleteBuilding(id: number): Promise<Building> {
+    return knexInstance("buildings").where({ id }).delete();
   }
 
   async getLocationTree(id: number): Promise<BuildingLocationTree> {

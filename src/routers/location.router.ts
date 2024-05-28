@@ -8,6 +8,7 @@ import {
   paginationRequestSchema,
 } from "../zod";
 import { PaginationUtils } from "../utils";
+import { HttpStatus } from "../constants";
 
 const locationRouter = Router();
 
@@ -45,7 +46,7 @@ locationRouter.post(
   async (req, res, next) => {
     try {
       const location = await locationService.createLocation(req.body);
-      res.status(201).json(location);
+      res.status(HttpStatus.CREATED).json(location);
     } catch (e) {
       next(e);
     }
@@ -70,8 +71,8 @@ locationRouter.delete(
   validateParams("id", locationIdSchema),
   async (req, res, next) => {
     try {
-      const location = await locationService.deleteLocation(+req.params.id);
-      res.json(location);
+      await locationService.deleteLocation(+req.params.id);
+      res.status(HttpStatus.DELETE).json({ success: true });
     } catch (e) {
       next(e);
     }
